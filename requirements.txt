@@ -1,0 +1,7 @@
+django
+djangorestframework
+Pillow
+psycopg2
+python-decouple
+psycopg2-binary
+mysqlclient==2.2.1
