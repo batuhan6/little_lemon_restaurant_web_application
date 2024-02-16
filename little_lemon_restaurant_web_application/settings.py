@@ -16,7 +16,6 @@ from decouple import config
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
@@ -27,7 +26,6 @@ SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG')
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -44,6 +42,7 @@ INSTALLED_APPS = [
     "rest_framework.authtoken",
 
     'restaurant',
+    'contents',
 ]
 
 MIDDLEWARE = [
@@ -61,7 +60,7 @@ ROOT_URLCONF = 'little_lemon_restaurant_web_application.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['restaurant/templates'],
+        'DIRS': ['assets/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -76,7 +75,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'little_lemon_restaurant_web_application.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
@@ -90,7 +88,6 @@ DATABASES = {
         'PASSWORD': config('DB_PASSWORD'),
     }
 }
-
 
 # The settings for media files have been updated for the Graded assessment
 MEDIA_URL = '/media/'
@@ -113,7 +110,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
@@ -127,20 +123,19 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = 'restaurant/static/'
-MEDIA_ROOT = 'restaurant/static/img'
+MEDIA_URL = '/assets/media/img/'
+STATIC_URL = '/assets/static/'
+MEDIA_ROOT = BASE_DIR / 'assets/media/img'
 
 if DEBUG:
     STATICFILES_DIRS = [
-        BASE_DIR / "restaurant/static"
+        BASE_DIR / "assets/static"
     ]
 else:
-    STATIC_ROOT = BASE_DIR / 'restaurant/static'
-
+    STATIC_ROOT = BASE_DIR / 'assets/static'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
