@@ -3,6 +3,19 @@ import os
 from django.db import models
 
 
+def document_upload_to(instance, file_name):
+    original_file_name, file_extension = os.path.splitext(file_name)
+    base_path_name = 'documents'
+    app_label = instance.content_type.app_label
+    model_name = instance.content_type.model
+    time = datetime.datetime.now()
+
+    new_file_name = instance.file_name + file_extension
+    full_path = os.path.join(
+        f'{base_path_name}/{app_label}/{model_name}/{time.year}/{time.month}/{time.day}/', new_file_name)
+    return full_path
+
+
 class Booking(models.Model):
     first_name = models.CharField(max_length=255)
     number_of_guests = models.IntegerField(default=6)
@@ -30,3 +43,4 @@ class Menu(models.Model):
 
     def __str__(self) -> str:
         return f'{self.name} : {str(self.price)}'
+
